@@ -51,10 +51,11 @@ const server = http.createServer((request, response) => {
   } else {
     filePath = `public${request.url}`;
   }
-  const absPath = `./filePath`;
+  const absPath = `./${filePath}`;
   serveStatic(response, cache, absPath);
 })
 
+// 服务器监听TCP/IP 3000端口 
 server.listen(3000, () => {
   console.log('Server is listening on port 3000.')
 })
