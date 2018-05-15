@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const mime = require('mime'); // mime模块，根据文件扩展名得出MIME文件类型
 let cache = {}; // 缓存文件内容的对象,以文件路径absPath为key
+const chatServer = require('./lib/chat_server');
 
 // 文件不存在时，发送404错误
 function send404(response) {
@@ -59,3 +60,5 @@ const server = http.createServer((request, response) => {
 server.listen(3000, () => {
   console.log('Server is listening on port 3000.')
 })
+
+chatServer.listen(server);
