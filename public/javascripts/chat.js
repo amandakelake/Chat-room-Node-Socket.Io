@@ -1,27 +1,29 @@
-// 定义一个Chat类
-let Chat = function(socket) {
+var Chat = function(socket) {
   this.socket = socket;
 };
 
-Chat.prototype.sendMessage = (room, text) => {
-  const message = {
-    room,
-    text
+Chat.prototype.sendMessage = function(room, text) {
+  var message = {
+    room: room,
+    text: text
   };
   this.socket.emit('message', message);
 };
 
-Chat.prototype.changeRoom = room => {
+Chat.prototype.changeRoom = function(room) {
   this.socket.emit('join', {
     newRoom: room
   });
 };
 
-Chat.prototype.processCommand = command => {
-  const words = command.split(' ');
-  const command = words[0].substring(1, words[0].length).toLowerCase();
-  let meaasge;
-  switch (command) {
+Chat.prototype.processCommand = function(command) {
+  var words = command.split(' ');
+  var command = words[0]
+                .substring(1, words[0].length)
+                .toLowerCase();
+  var message = false;
+
+  switch(command) {
     case 'join':
       words.shift();
       var room = words.join(' ');
@@ -35,7 +37,7 @@ Chat.prototype.processCommand = command => {
     default:
       message = 'Unrecognized command.';
       break;
-  }
+  };
 
   return message;
 };
